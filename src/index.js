@@ -14,10 +14,13 @@ app.get('/health', (req, res) => {
 
 // TODO: Mount route modules here
 // app.use('/api/projects', require('./routes/projects'));
-// app.use('/api/jira', require('./routes/jira'));
+// app.use('/api/members', require('./routes/members'));
 
-app.listen(PORT, () => {
-  console.log(`NF Project Portal running on port ${PORT}`);
-});
+// Only start server when run directly (not when imported by tests)
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`NF Project Portal running on port ${PORT}`);
+  });
+}
 
 module.exports = app;
