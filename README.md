@@ -1,12 +1,14 @@
 # NF Project Portal
 
-Project management portal with Jira integration for NF.
+Project management portal with dashboard, metrics, and auth.
+
+Runs fully locally — no external services required.
 
 ## Features (planned)
-- Project dashboard with CRUD API
-- Jira issue sync
-- API key authentication
-- CI/CD pipeline
+- Project dashboard with CRUD API (#1)
+- Project status & metrics API (#5)
+- API key authentication (#3)
+- CI/CD pipeline (#4)
 
 ## Quick Start
 
@@ -19,4 +21,4 @@ npm run dev
 
 - `GET /health` - Health check
 - `GET /api/projects` - List projects (planned)
-- `GET /api/jira/projects` - List Jira projects (planned)
+- `GET /api/metrics/summary` - Project metrics (planned)

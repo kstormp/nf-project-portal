@@ -1,7 +1,7 @@
 # NF Project Portal
 
 ## Project Overview
-A project management portal for NF (Nordisk Film) that provides a unified dashboard for tracking projects, syncing with Jira, and managing team workflows.
+A project management portal that provides a unified dashboard for tracking projects, viewing metrics, and managing team workflows. Runs fully locally with no external dependencies.
 
 ## Tech Stack
 - **Runtime:** Node.js 20+
@@ -11,9 +11,9 @@ A project management portal for NF (Nordisk Film) that provides a unified dashbo
 
 ## Architecture
 - `src/index.js` — Express app entry point
-- `src/routes/` — Route handlers (one file per domain: projects, jira, auth)
+- `src/routes/` — Route handlers (one file per domain: projects, metrics, auth)
 - `src/middleware/` — Express middleware (auth, error handling, logging)
-- `src/services/` — Business logic and external integrations (Jira API client)
+- `src/services/` — Business logic (activity tracking, data aggregation)
 - `tests/` — Test files matching `*.test.js`
 
 ## Conventions
@@ -21,7 +21,7 @@ A project management portal for NF (Nordisk Film) that provides a unified dashbo
 - Keep route handlers thin — business logic goes in services/
 - All API routes under `/api/` prefix
 - Return consistent JSON: `{ data: ... }` for success, `{ error: ... }` for errors
-- Use environment variables for configuration (PORT, JIRA_URL, JIRA_TOKEN)
+- Use environment variables for configuration (PORT, API_TOKEN)
 - No ORMs — use plain SQL or simple data structures for now
 
 ## Commands
