@@ -1,28 +1,35 @@
 # NF Project Portal
 
 ## Project Overview
-A project management portal that provides a unified dashboard for tracking projects, viewing metrics, and managing team workflows. Runs fully locally with no external dependencies.
+A project management portal with dashboard for tracking projects and team members. Runs fully locally — no external dependencies, all data in-memory.
 
 ## Tech Stack
 - **Runtime:** Node.js 20+
 - **Framework:** Express.js
 - **Testing:** Node.js built-in test runner (`node --test`)
-- **Frontend:** (planned) Simple HTML/JS served from Express, or Next.js in phase 2
+- **Frontend:** Vanilla HTML/CSS/JS served from Express (no build step, no frameworks)
 
 ## Architecture
-- `src/index.js` — Express app entry point
-- `src/routes/` — Route handlers (one file per domain: projects, metrics, auth)
-- `src/middleware/` — Express middleware (auth, error handling, logging)
-- `src/services/` — Business logic (activity tracking, data aggregation)
+- `src/index.js` — Express app entry point, mounts routes and static files
+- `src/routes/` — Route handlers (one file per domain: projects, members)
+- `src/middleware/` — Express middleware (auth, error handling)
+- `src/services/` — In-memory data stores and business logic
+- `src/public/` — Frontend (index.html, style.css, app.js)
 - `tests/` — Test files matching `*.test.js`
 
 ## Conventions
 - Use Node.js built-in test runner, not Jest
 - Keep route handlers thin — business logic goes in services/
 - All API routes under `/api/` prefix
+- Frontend served as static files from `src/public/`
 - Return consistent JSON: `{ data: ... }` for success, `{ error: ... }` for errors
 - Use environment variables for configuration (PORT, API_TOKEN)
-- No ORMs — use plain SQL or simple data structures for now
+- In-memory storage using plain JS (Maps or arrays) — no databases, no ORMs
+
+## Important for parallel development
+- Each feature has its own route file and service file — no shared mutable state between features
+- `src/index.js` is the only shared file — mount new routes by adding `app.use()` lines
+- If your feature adds a route, add it to index.js and document the mount point
 
 ## Commands
 - `npm start` — Start the server
